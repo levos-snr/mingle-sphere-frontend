@@ -8,7 +8,11 @@ export default {
     flowbite.content(),
   ],
   theme: {
-    extend: {},
+    extend: {
+      lineClamp: {
+        3: '3',
+      },
+    },
   },
   plugins: [
     flowbite.plugin(),
