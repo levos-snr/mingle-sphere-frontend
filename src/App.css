@@ -1,356 +1,369 @@
 /* App Styles */
 .App {
-    text-align: center;
-    padding: 20px;
-    position: relative; /* Ensure overlay can be placed on top */
-    background-image: url('https://images.unsplash.com/photo-1506784881475-0e408bbca849?q=80&w=2992&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    min-height: 100vh;
-    color: #000000; /* Dark text for contrast */
-    font-family: 'Arial', sans-serif, 'Open sans';
-  }
-  
-  /* Overlay for transparency */
-  .App::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white overlay */
-    z-index: -1;
-  }
-  
-  /* Navigation Button Styles */
-  nav button {
-    margin: 10px;
-    padding: 12px 25px;
-    background-color: #FF5733; /* Bright orange */
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s, transform 0.2s; /* Transition for hover effects */
-  }
-  
-  nav button:hover {
-    background-color: #C0392B; /* Darker orange on hover */
-    transform: translateY(-2px); /* Lift effect */
-  }
-  
-  /* Form Container Styles */
-  .form-container {
-    margin: 20px auto;
-    padding: 30px;
-    max-width: 400px;
-    background-color: rgba(255, 255, 255, 0.9); /* Soft white background */
-    border: none;
-    border-radius: 8px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Light shadow */
-  }
-  
-  .form-container h2 {
-    margin-bottom: 20px;
-    color: #FF5733; /* Bright header color */
-    font-size: 24px; /* Larger heading */
-  }
-  
-  .form-container div {
-    margin-bottom: 10px;
-  }
-  
-  .form-container label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold; /* Bold labels */
-    color: #FF5733; /* Bright label color */
-  }
-  
-  .form-container input {
-    width: 100%;
-    padding: 10px;
-    margin: 5px 0;
-    border: 1px solid #000000;
-    border-radius: 5px;
-    transition: border 0.3s, box-shadow 0.3s; /* Smooth transition */
-  }
-  
-  .form-container input:focus {
-    border: 1px solid #FF5733; /* Highlight border */
-    box-shadow: 0 0 5px rgba(255, 87, 51, 0.5); /* Glow effect */
-    outline: none; /* Remove default outline */
-  }
-  
-  button[type="submit"] {
-    background-color: #FF5733; /* Bright orange */
-    color: white;
-    padding: 12px;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    border-radius: 5px;
-    font-weight: bold;
-    transition: background-color 0.3s, transform 0.2s; /* Transition for hover effects */
-  }
-  
-  button[type="submit"]:hover {
-    background-color: #C0392B; /* Darker orange on hover */
-    transform: translateY(-2px); /* Lift effect */
-  }
-  
-  .error-message {
-    color: red;
-  }
-  
-  /* Home Styles */
-  .home-container {
-    padding: 50px;
-    background-color: rgba(255, 255, 255, 0.9); /* Light and bright background */
-    color: #000000;
-    border-radius: 8px;
-  }
-  
-  /* Main Headings */
-  h1 {
-    font-size: 48px; /* Larger heading */
-    color: #FF5733; /* Bright main heading */
-    margin-bottom: 20px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
-  }
-  
-  h2 {
-    margin: 20px 0;
-    font-size: 28px; /* Larger subheadings */
-    color: #2980b9; /* Bright blue */
-  }
-  
-  /* Paragraph Styles */
-  p {
-    font-size: 18px;
-    color: #000000; /* Slightly darker for contrast */
-  }
-  
-  /* About Section */
-  .about-section {
-    background-color: rgba(255, 255, 255, 0.9); /* Soft white */
-    padding: 40px;
-    margin: 40px auto;
-    max-width: 800px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow */
-  }
-  
-  .about-section h2 {
-    color: #FF5733;
-    margin-bottom: 20px;
-  }
-  
-  .platform-features {
-    list-style-type: none;
-    padding: 0;
-    margin: 20px 0;
-  }
-  
-  .platform-features li {
-    background-color: rgba(255, 235, 205, 0.9); /* Light peach */
-    padding: 15px;
-    margin: 10px 0;
-    border-radius: 4px;
-    color: #34495e;
-    transition: transform 0.2s; /* Transition for hover effects */
-  }
-  
-  .platform-features li:hover {
-    transform: translateY(-2px); /* Lift effect on hover */
-  }
-  
-  /* Event Grid */
-  .upcoming-events {
-    margin: 60px 0;
-  }
-  
-  .upcoming-events h2 {
-    color: #FF5733; /* Bright orange */
-    margin-bottom: 40px;
-  }
-  
-  .event-grid {
-    display: flex;
-    justify-content: center; /* Centered alignment */
-    gap: 20px;
-    flex-wrap: wrap;
-  }
-  
-  /* Event Cards */
-  .event-card {
-    background-color: rgba(255, 255, 255, 0.9); /* Card background */
-    padding: 20px;
-    width: 300px; /* Slightly wider card */
-    border-radius: 8px;
-    text-align: left;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow */
-    transition: transform 0.3s, box-shadow 0.3s; /* Animation effects */
-  }
-  
-  .event-card:hover {
-    transform: translateY(-5px); /* Slight lift effect */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
-  }
-  
-  .event-card h3 {
-    font-size: 24px; /* Larger heading */
-    color: #2980b9; /* Bright blue */
-  }
-  
-  .event-card p {
-    font-size: 16px;
-    color: #000000; /* Softer color for body text */
-  }
-  
-  .event-card button {
-    background-color: #FF5733; /* Bright orange */
-    border: none;
-    padding: 12px;
-    color: white;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-top: 10px;
-    width: 100%;
-    font-weight: bold;
-    transition: background-color 0.3s, transform 0.2s; /* Transition for hover effects */
-  }
-  
-  .event-card button:hover {
-    background-color: #C0392B; /* Darker orange on hover */
-    transform: translateY(-2px); /* Lift effect */
-  }
-  
-  /* Testimonials */
-  .testimonials {
-    margin: 60px 0;
-    text-align: center;
-  }
-  
-  .testimonials h2 {
-    color: #FF5733; /* Bright orange */
-    margin-bottom: 20px;
-  }
-  
-  .testimonial-card {
-    background-color: rgba(255, 255, 255, 0.9);
-    padding: 20px;
-    margin: 20px auto;
-    max-width: 600px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow */
-  }
-  
-  .testimonial-card p {
-    color: #282726;
-    font-style: italic; /* Italics for testimonials */
-  }
-  
-  /* Footer */
-  footer {
-    background-color: #FFA500; /* Bright blue */
-    padding: 20px;
-    color:#20B2A6;
-    text-align: center;
-    margin-top: 40px;
-    font-size: 12;
-    font-weight: bold;
-    font-family: 'Courier', monospace; 
-  }
-  
-  footer p {
-    margin: 5px 0;
-  }
-  /* Modal Styles */
-  .payment-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999; /* Ensures the modal is on top */
-  }
-  
-  .payment-modal-content {
-    background-color: white;
-    padding: 30px;
-    border-radius: 8px;
-    text-align: center;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Modal shadow */
-    max-width: 400px;
-    width: 100%;
-  }
-  
-  .payment-modal-content h3 {
-    margin-bottom: 20px;
-    font-size: 24px;
-    color: #000000;
-  }
-  
-  /* Payment Buttons */
-  .payment-modal-content button {
-    margin: 10px;
-    padding: 12px 20px;
-    background-color: #28a745; /* Vibrant green */
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 16px;
-    transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
-    display: inline-block;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Initial button shadow */
-  }
-  
-  /* Button Hover Effects */
-  .payment-modal-content button:hover {
-    background-color: #218838; /* Darker green on hover */
-    transform: translateY(-2px); /* Slight lift on hover */
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Elevated shadow on hover */
-  }
-  
-  /* Button Active (Click) State */
-  .payment-modal-content button:active {
-    background-color: #1e7e34; /* Even darker green when clicked */
-    transform: translateY(0); /* Reset the lift */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Return to the initial shadow */
-  }
-  
-  /* Cancel Button Style */
-  .payment-modal-content button:last-child {
-    background-color: #dc3545; /* Bright red for cancel */
-  }
-  
-  .payment-modal-content button:last-child:hover {
-    background-color: #c82333; /* Darker red on hover */
-  }
-  
-  .payment-modal-content button:last-child:active {
-    background-color: #bd2130; /* Even darker red when clicked */
-  }
-  
-
-/* Increase font size to 12pt */
-body {
-  font-size: 12pt;
+  text-align: center;
+  padding: 20px;
+  position: relative;
+  background-color: rgba(
+    51,
+    51,
+    51,
+    0.8
+  ); /* Slightly transparent background for contrast */
+  min-height: 100vh;
+  color: #fff; /* White text for contrast against the dark background */
+  font-family: 'Arial', sans-serif;
+  overflow: hidden; /* Ensure overflow is hidden */
 }
 
-/* Add italic style to headings (h1-h6) */
-h1, h2, h3, h4, h5, h6 {
-  font-style: italic;
+.App::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('https://images.unsplash.com/photo-1506784881475-0e408bbca849?q=80&w=2992&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  filter: blur(10px); /* Adjust the blur radius as needed */
+  z-index: -1; /* Place behind the content */
+}
+
+.container .content {
+  position: relative; /* Position relative to the container */
+  z-index: 1; /* Ensure content is on top of the blurred background */
 }
 
 
+/* Overlay for transparency */
+.App::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.5
+  ); /* Semi-transparent white overlay */
+  z-index: -1;
+}
+
+/* Navigation Button Styles */
+nav button {
+  margin: 10px;
+  padding: 12px 25px;
+  background-color: #ff5733; /* Bright orange */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s, transform 0.2s; /* Transition for hover effects */
+}
+
+nav button:hover {
+  background-color: #c0392b; /* Darker orange on hover */
+  transform: translateY(-2px); /* Lift effect */
+}
+
+/* Form Container Styles */
+.form-container {
+  margin: 20px auto;
+  padding: 30px;
+  max-width: 400px;
+  background-color: rgba(255, 255, 255, 0.9); /* Soft white background */
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Light shadow */
+}
+
+.form-container h2 {
+  margin-bottom: 20px;
+  color: #ff5733; /* Bright header color */
+  font-size: 24px; /* Larger heading */
+}
+
+.form-container div {
+  margin-bottom: 10px;
+}
+
+.form-container label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold; /* Bold labels */
+  color: #ff5733; /* Bright label color */
+}
+
+.form-container input {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: border 0.3s, box-shadow 0.3s; /* Smooth transition */
+}
+
+.form-container input:focus {
+  border: 1px solid #ff5733; /* Highlight border */
+  box-shadow: 0 0 5px rgba(255, 87, 51, 0.5); /* Glow effect */
+  outline: none; /* Remove default outline */
+}
+
+button[type='submit'] {
+  background-color: #ff5733; /* Bright orange */
+  color: white;
+  padding: 12px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s, transform 0.2s; /* Transition for hover effects */
+}
+
+button[type='submit']:hover {
+  background-color: #c0392b; /* Darker orange on hover */
+  transform: translateY(-2px); /* Lift effect */
+}
+
+.error-message {
+  color: red;
+}
+
+/* Home Styles */
+.home-container {
+  padding: 50px;
+  background-color: rgba(255, 255, 255, 0.9); /* Light and bright background */
+  color: #333;
+  border-radius: 8px;
+}
+
+/* Main Headings */
+h1 {
+  font-size: 48px; /* Larger heading */
+  color: #ff5733; /* Bright main heading */
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+}
+
+h2 {
+  margin: 20px 0;
+  font-size: 28px; /* Larger subheadings */
+  color: #2980b9; /* Bright blue */
+}
+
+/* Paragraph Styles */
+p {
+  font-size: 18px;
+  color: #555; /* Slightly darker for contrast */
+}
+
+/* About Section */
+.about-section {
+  background-color: rgba(255, 255, 255, 0.9); /* Soft white */
+  padding: 40px;
+  margin: 40px auto;
+  max-width: 800px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow */
+}
+
+.about-section h2 {
+  color: #ff5733;
+  margin-bottom: 20px;
+}
+
+.platform-features {
+  list-style-type: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.platform-features li {
+  background-color: rgba(255, 235, 205, 0.9); /* Light peach */
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 4px;
+  color: #34495e;
+  transition: transform 0.2s; /* Transition for hover effects */
+}
+
+.platform-features li:hover {
+  transform: translateY(-2px); /* Lift effect on hover */
+}
+
+/* Event Grid */
+.upcoming-events {
+  margin: 60px 0;
+}
+
+.upcoming-events h2 {
+  color: #ff5733; /* Bright orange */
+  margin-bottom: 40px;
+}
+
+.event-grid {
+  display: flex;
+  justify-content: center; /* Centered alignment */
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* Event Cards */
+.event-card {
+  background-color: rgba(255, 255, 255, 0.9); /* Card background */
+  padding: 20px;
+  width: 300px; /* Slightly wider card */
+  border-radius: 8px;
+  text-align: left;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow */
+  transition: transform 0.3s, box-shadow 0.3s; /* Animation effects */
+}
+
+.event-card:hover {
+  transform: translateY(-5px); /* Slight lift effect */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+
+.event-card h3 {
+  font-size: 24px; /* Larger heading */
+  color: #2980b9; /* Bright blue */
+}
+
+.event-card p {
+  font-size: 16px;
+  color: #7f8c8d; /* Softer color for body text */
+}
+
+.event-card button {
+  background-color: #ff5733; /* Bright orange */
+  border: none;
+  padding: 12px;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 10px;
+  width: 100%;
+  font-weight: bold;
+  transition: background-color 0.3s, transform 0.2s; /* Transition for hover effects */
+}
+
+.event-card button:hover {
+  background-color: #c0392b; /* Darker orange on hover */
+  transform: translateY(-2px); /* Lift effect */
+}
+
+/* Testimonials */
+.testimonials {
+  margin: 60px 0;
+  text-align: center;
+}
+
+.testimonials h2 {
+  color: #ff5733; /* Bright orange */
+  margin-bottom: 20px;
+}
+
+.testimonial-card {
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 600px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow */
+}
+
+.testimonial-card p {
+  color: #2c3e50;
+  font-style: italic; /* Italics for testimonials */
+}
+
+/* Footer */
+footer {
+  background-color: #2980b9; /* Bright blue */
+  padding: 20px;
+  color: white;
+  text-align: center;
+  margin-top: 40px;
+}
+
+footer p {
+  margin: 5px 0;
+}
+/* Modal Styles */
+.payment-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Ensures the modal is on top */
+}
+
+.payment-modal-content {
+  background-color: white;
+  padding: 30px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Modal shadow */
+  max-width: 400px;
+  width: 100%;
+}
+
+.payment-modal-content h3 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+/* Payment Buttons */
+.payment-modal-content button {
+  margin: 10px;
+  padding: 12px 20px;
+  background-color: #28a745; /* Vibrant green */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+  display: inline-block;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Initial button shadow */
+}
+
+/* Button Hover Effects */
+.payment-modal-content button:hover {
+  background-color: #218838; /* Darker green on hover */
+  transform: translateY(-2px); /* Slight lift on hover */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Elevated shadow on hover */
+}
+
+/* Button Active (Click) State */
+.payment-modal-content button:active {
+  background-color: #1e7e34; /* Even darker green when clicked */
+  transform: translateY(0); /* Reset the lift */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Return to the initial shadow */
+}
+
+/* Cancel Button Style */
+.payment-modal-content button:last-child {
+  background-color: #dc3545; /* Bright red for cancel */
+}
+
+.payment-modal-content button:last-child:hover {
+  background-color: #c82333; /* Darker red on hover */
+}
+
+.payment-modal-content button:last-child:active {
+  background-color: #bd2130; /* Even darker red when clicked */
+}
