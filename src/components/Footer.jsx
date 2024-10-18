@@ -1,24 +1,67 @@
 import React from 'react';
-
+import { Instagram, Facebook, Linkedin } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer>
-      <p>&copy; {new Date().getFullYear()} Event Booking System. All rights reserved.</p>
-      <p>Follow us on social media:</p>
-      <ul>
-        <li><a href="https://www.facebook.com/eventbookingsystem">Facebook</a></li>
-        <li><a href="https://www.twitter.com/eventbookingsystem">Twitter</a></li>
-        <li><a href="https://www.instagram.com/eventbookingsystem">Instagram</a></li>
-        <li><a href="https://www.linkedin.com/eventbookingsystem">LinkedIn</a></li>
+    <footer className="bg-gray-800 text-white py-8 px-4">
+      <div className="container mx-auto">
+        {/* Footer top section */}
+        <div className="flex flex-col md:flex-row justify-between items-center mb-6 space-y-4 md:space-y-0">
+          {/* Logo Section */}
+          <h2 className="text-2xl font-bold">
+            mingle<span className="text-orange-400">sphere</span>
+          </h2>
 
+          {/* Subscribe Input */}
+          <div className="flex items-center">
+            <input
+              type="email"
+              placeholder="Enter your email"
+              className="bg-white text-black px-4 py-2 rounded-l-md focus:outline-none"
+            />
+            <button className="bg-orange-500 px-4 py-2 rounded-r-md hover:bg-orange-600 transition-transform transform hover:scale-105">
+              Subscribe
+            </button>
+          </div>
+        </div>
+        
+        {/* Navigation Links */}
+        <nav className="mb-6">
+          <ul className="flex flex-wrap justify-center md:justify-start space-x-6 text-sm">
+            <li><a href="#" className="hover:text-orange-400 transition-colors">Home</a></li>
+            <li><a href="#" className="hover:text-orange-400 transition-colors">About</a></li>
+            <li><a href="#" className="hover:text-orange-400 transition-colors">Services</a></li>
+            <li><a href="#" className="hover:text-orange-400 transition-colors">Get in touch</a></li>
+            <li><a href="#" className="hover:text-orange-400 transition-colors">FAQs</a></li>
+          </ul>
+        </nav>
 
-      </ul>
+        {/* Divider */}
+        <hr className="border-gray-700 mb-6" />
+
+        {/* Social Icons and Copyright */}
+        <div className="flex flex-col md:flex-row justify-between items-center">
+          {/* Social Media Icons */}
+          <div className="flex space-x-4 mb-4 md:mb-0">
+            <a href="#" className="text-orange-400 hover:text-orange-300 transition-colors">
+              <Linkedin size={20} />
+            </a>
+            <a href="#" className="text-orange-400 hover:text-orange-300 transition-colors">
+              <Instagram size={20} />
+            </a>
+            <a href="#" className="text-orange-400 hover:text-orange-300 transition-colors">
+              <Facebook size={20} />
+            </a>
+          </div>
+
+          {/* Copyright Text */}
+          <p className="text-sm text-gray-400">
+            © 2024 Minglesphere. All rights reserved.
+          </p>
+        </div>
+      </div>
     </footer>
   );
 };
 
-
 export default Footer;
-
-
