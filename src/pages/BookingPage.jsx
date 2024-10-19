@@ -83,7 +83,7 @@ const BookingPage = () => {
       <main className="container mx-auto px-4 py-2">
         <form onSubmit={handleSubmit} className="max-w-lg mx-auto bg-gray-900 rounded-lg shadow-md p-6">
           <div className="mb-4">
-            <label htmlFor="dietary_preferences" className="block mb-2 font-medium text-gray-300">Dietary Preferences</label>
+            <label htmlFor="dietary_preferences" className="block mb-2 font-medium text-gray-300">Preferences</label>
             <input
               type="text"
               id="dietary_preferences"

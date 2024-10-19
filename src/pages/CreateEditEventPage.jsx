@@ -3,21 +3,16 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { Toast } from 'flowbite-react';
 import { Calendar, MapPin, Image as ImageIcon } from 'lucide-react';
+import { useParams, useNavigate } from 'react-router-dom';
 
-const CreateEventPage = () => {
+const CreateEditEventPage = () => {
   const [user, setUser] = useState(null);
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
   const [toastType, setToastType] = useState('success');
-
-  useEffect(() => {
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-  }, []);
-
-  const initialValues = {
+  const [isEditing, setIsEditing] = useState(false);
+  const [eventData, setEventData] = useState(null);
+  const [initialValues, setInitialValues] = useState({
     title: '',
     location: '',
     start_datetime: '',
@@ -29,7 +24,55 @@ const CreateEventPage = () => {
     category: '',
     is_private: false,
     price: '',
+  });
+  
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  
+  useEffect(() => {
+      const storedUser = localStorage.getItem('user');
+      if (storedUser) {
+        setUser(JSON.parse(storedUser));
+      }
+  
+      if (id) {
+        setIsEditing(true);
+        fetchEventData(id);
+      }
+    }, [id]);
+  
+  const fetchEventData = async (eventId) => {
+    try {
+      const response = await fetch(`/api/events/${eventId}`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch event data');
+      }
+      const data = await response.json();
+      setEventData(data);
+      
+      // Pre-populate the form with fetched data
+      setInitialValues({
+        title: data.title || '',
+        location: data.location || '',
+        start_datetime: data.start_datetime ? new Date(data.start_datetime).toISOString().slice(0, 16) : '',
+        end_datetime: data.end_datetime ? new Date(data.end_datetime).toISOString().slice(0, 16) : '',
+        description: data.description || '',
+        cover_photo_url: data.cover_photo_url || '',
+        cover_photo_file: null,
+        capacity: data.capacity || '',
+        category: data.category || '',
+        is_private: data.is_private || false,
+        price: data.price || '',
+      });
+    } catch (error) {
+      console.error('Error fetching event data:', error);
+      setToastMessage('Error fetching event data: ' + error.message);
+      setToastType('error');
+      setShowToast(true);
+    }
   };
+  
 
   const validationSchema = Yup.object({
     title: Yup.string().required('Title is required'),
@@ -45,9 +88,10 @@ const CreateEventPage = () => {
     price: Yup.number().min(0, 'Price cannot be negative'),
   });
 
+
   const onSubmit = async (values, { setSubmitting, resetForm }) => {
     if (!user) {
-      setToastMessage('You must be logged in to create an event');
+      setToastMessage('You must be logged in to create or edit an event');
       setToastType('error');
       setShowToast(true);
       setSubmitting(false);
@@ -55,7 +99,6 @@ const CreateEventPage = () => {
     }
 
     try {
-      // Create a new object with all the values except cover_photo_file
       const eventData = Object.keys(values).reduce((acc, key) => {
         if (key !== 'cover_photo_file') {
           acc[key] = values[key];
@@ -63,11 +106,14 @@ const CreateEventPage = () => {
         return acc;
       }, {});
 
-      // Add organizer_id to the eventData
       eventData.organizer_id = user.id;
+      
 
-      const response = await fetch('/api/events', {
-        method: 'POST',
+      const url = isEditing ? `/api/events/${id}` : '/api/events';
+      const method = isEditing ? 'PATCH' : 'POST';
+
+      const response = await fetch(url, {
+        method: method,
         headers: {
           'Authorization': `Bearer ${user.token}`,
           'Content-Type': 'application/json',
@@ -76,13 +122,16 @@ const CreateEventPage = () => {
       });
 
       if (!response.ok) {
-        throw new Error('Failed to create event');
+        throw new Error(`Failed to ${isEditing ? 'update' : 'create'} event`);
       }
 
-      setToastMessage('Event created successfully');
-     setToastType('success');
+      setToastMessage(`Event ${isEditing ? 'updated' : 'created'} successfully`);
+      setToastType('success');
       setShowToast(true);
-      resetForm();
+
+      if (!isEditing) {
+        resetForm();
+      }
 
       // Handle file upload separately if a file was selected
       if (values.cover_photo_file) {
@@ -101,8 +150,12 @@ const CreateEventPage = () => {
           throw new Error('Failed to upload cover photo');
         }
       }
+
+      // Navigate back to the events page after successful submission
+      setToastType('success');
+      navigate(-1)
     } catch (error) {
-      setToastMessage('Error creating event: ' + error.message);
+      setToastMessage(`Error ${isEditing ? 'updating' : 'creating'} event: ` + error.message);
       setToastType('error');
       setShowToast(true);
     }
@@ -112,14 +165,15 @@ const CreateEventPage = () => {
 
   return (
     <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow m-14">
-      <h1 className="text-2xl font-bold mb-6">Create Event</h1>
-
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={onSubmit}
-      >
-        {({ isSubmitting, setFieldValue }) => (
+        <h1 className="text-2xl font-bold mb-6">{isEditing ? 'Edit Event' : 'Create Event'}</h1>
+  
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          onSubmit={onSubmit}
+          enableReinitialize
+        >       
+            {({ isSubmitting, setFieldValue }) => (
           <Form className="space-y-4">
             <div>
               <label htmlFor="title" className="block text-sm font-medium text-gray-700">
@@ -332,7 +386,7 @@ const CreateEventPage = () => {
                 disabled={isSubmitting}
                 className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 transition duration-300 disabled:opacity-50"
               >
-                {isSubmitting ? 'Creating...' : 'Create Event'}
+                {isSubmitting ? (isEditing ? 'Updating...' : 'Creating...') : (isEditing ? 'Update Event' : 'Create Event')}
               </button>
             </div>
           </Form>
@@ -358,4 +412,4 @@ const CreateEventPage = () => {
   );
 };
 
-export default CreateEventPage;
+export default CreateEditEventPage;

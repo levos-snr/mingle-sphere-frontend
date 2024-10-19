@@ -37,7 +37,7 @@ const EventCard = ({ id, cover_photo_url, title, start_datetime, location, categ
 
   return (
     <div className="bg-white rounded-lg overflow-hidden shadow-md transition-transform transform hover:scale-105">
-      <img src={cover_photo_url || "https://placehold.co/600x400"} alt={title} className="w-full h-48 object-cover" />
+        <img src={cover_photo_url || "https://placehold.co/600x400"} alt={title} className="w-full h-48 object-cover" />
       <div className="p-4">
         <h3 className="font-semibold text-lg mb-2">{title}</h3>
 
@@ -77,7 +77,7 @@ const EventCard = ({ id, cover_photo_url, title, start_datetime, location, categ
         {isAdmin && (
           <div className="flex space-x-2 mt-4">
             <Link
-              to={`/editEvent/${id}`}
+              to={`/edit-event/${id}`}
               className="text-blue-600 hover:text-blue-800 transition-colors duration-200"
             >
               <Edit className="inline-block w-5 h-5 mr-1" />
@@ -92,7 +92,7 @@ const EventCard = ({ id, cover_photo_url, title, start_datetime, location, categ
             </button>
           </div>
         )}
-      </div>
+        </div>
     </div>
   );
 };

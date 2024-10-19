@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { User, LogOut, Settings, Heart, ChevronDown } from "lucide-react";
+import { User, LogOut, Settings, Heart, ChevronDown, Bell } from "lucide-react";
 import logo from "../assets/logo.png";
 
 const Navbar = () => {
@@ -41,63 +41,91 @@ const Navbar = () => {
           </span>
         </NavLink>
 
-        <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse gap-3">
+        {/* New navigation links */}
+        <div className="hidden md:flex items-center space-x-4">
+          <NavLink
+            to="/allEvent"
+            className="text-gray-300 hover:text-orange-500 transition duration-150 ease-in-out"
+          >
+            All Events
+          </NavLink>
+          <NavLink
+            to="/community"
+            className="text-gray-300 hover:text-orange-500 transition duration-150 ease-in-out"
+          >
+            Community
+          </NavLink>
+          <NavLink
+            to="/map"
+            className="text-gray-300 hover:text-orange-500 transition duration-150 ease-in-out"
+          >
+            Map
+          </NavLink>
+        </div>
+
+        <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse gap-3 items-center">
           {user ? (
-            <div className="relative" ref={dropdownRef}>
-              <button
-                onClick={() => setIsOpen(!isOpen)}
-                className="flex items-center space-x-2 text-gray-400 hover:text-orange-500 focus:outline-none transition-transform transform duration-200 ease-in-out"
-              >
-                <div className="w-10 h-10 rounded-full overflow-hidden bg-gray-800">
-                  {user.profile_photo_url ? (
-                    <img
-                      src={user.profile_photo_url}
-                      alt="Profile"
-                      className="w-full h-full object-cover"
-                    />
-                  ) : (
-                    <User className="w-full h-full text-gray-500" />
-                  )}
-                </div>
-                <span className="hidden md:inline">{user.name}</span>
-                <ChevronDown
-                  className={`w-4 h-4 transition-transform duration-200 ${
-                    isOpen ? "transform rotate-180" : ""
-                  }`}
-                />
+            <>
+              {/* Notification icon for authenticated users */}
+              <button className="text-gray-400 hover:text-orange-500 focus:outline-none transition-transform transform duration-200 ease-in-out">
+                <Bell className="w-6 h-6" />
               </button>
-              {isOpen && (
-                <div className="absolute right-0 mt-2 w-48 bg-gray-800 rounded-md overflow-hidden shadow-xl z-10 animate-fadeIn">
-                  <div className="px-4 py-2 border-b border-gray-700">
-                    <p className="text-sm font-medium text-gray-400">
-                      {user.name}
-                    </p>
-                    <p className="text-sm text-gray-500">{user.email}</p>
+              <div className="relative" ref={dropdownRef}>
+                <button
+                  onClick={() => setIsOpen(!isOpen)}
+                  className="flex items-center space-x-2 text-gray-400 hover:text-orange-500 focus:outline-none transition-transform transform duration-200 ease-in-out"
+                >
+                  <div className="w-10 h-10 rounded-full overflow-hidden bg-gray-800">
+                    {user.profile_photo_url ? (
+                      <img
+                        src={user.profile_photo_url}
+                        alt="Profile"
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <User className="w-full h-full text-gray-500" />
+                    )}
                   </div>
-                  <NavLink
-                    to="/settings"
-                    className="block px-4 py-2 text-sm text-gray-400 hover:bg-gray-700 hover:text-orange-500 transition duration-150 ease-in-out"
-                  >
-                    <Settings className="inline-block w-4 h-4 mr-2" />
-                    Settings
-                  </NavLink>
-                  <NavLink
-                    to="/preferences"
-                    className="block px-4 py-2 text-sm text-gray-400 hover:bg-gray-700 hover:text-orange-500 transition duration-150 ease-in-out"
-                  >
-                    <Heart className="inline-block w-4 h-4 mr-2" />
-                    Preferences
-                  </NavLink>
-                  <button
-                    onClick={handleSignOut}
-                    className="block w-full text-left px-4 py-2 text-sm text-red-500 hover:bg-red-600 hover:text-white transition duration-150 ease-in-out"
-                  >
-                    <LogOut className="inline-block w-4 h-4 mr-2" />
-                    Sign Out
-                  </button>
-                </div>
-              )}
-            </div>
+                  <span className="hidden md:inline">{user.name}</span>
+                  <ChevronDown
+                    className={`w-4 h-4 transition-transform duration-200 ${
+                      isOpen ? "transform rotate-180" : ""
+                    }`}
+                  />
+                </button>
+                {isOpen && (
+                  <div className="absolute right-0 mt-2 w-48 bg-gray-800 rounded-md overflow-hidden shadow-xl z-10 animate-fadeIn">
+                    <div className="px-4 py-2 border-b border-gray-700">
+                      <p className="text-sm font-medium text-gray-400">
+                        {user.name}
+                      </p>
+                      <p className="text-sm text-gray-500">{user.email}</p>
+                    </div>
+                    <NavLink
+                      to="/settings"
+                      className="block px-4 py-2 text-sm text-gray-400 hover:bg-gray-700 hover:text-orange-500 transition duration-150 ease-in-out"
+                    >
+                      <Settings className="inline-block w-4 h-4 mr-2" />
+                      Settings
+                    </NavLink>
+                    <NavLink
+                      to="/preferences"
+                      className="block px-4 py-2 text-sm text-gray-400 hover:bg-gray-700 hover:text-orange-500 transition duration-150 ease-in-out"
+                    >
+                      <Heart className="inline-block w-4 h-4 mr-2" />
+                      Preferences
+                    </NavLink>
+                    <button
+                      onClick={handleSignOut}
+                      className="block w-full text-left px-4 py-2 text-sm text-red-500 hover:bg-red-600 hover:text-white transition duration-150 ease-in-out"
+                    >
+                      <LogOut className="inline-block w-4 h-4 mr-2" />
+                      Sign Out
+                    </button>
+                  </div>
+                )}
+              </div>
+            </>
           ) : (
             <>
               <NavLink
