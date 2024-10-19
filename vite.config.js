@@ -8,7 +8,7 @@ export default defineConfig({
     cors: true,
     proxy: {
       "/api": {
-        target: "https://mingle-sphere-backend.onrender.com",
+        target: "https://mingle-sphere-backend.vercel.app/",
         changeOrigin: true,
         secure: false,
         rewrite: (path) => path.replace(/^\/api/, ""),

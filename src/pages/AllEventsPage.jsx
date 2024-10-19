@@ -1,47 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Calendar, MapPin, User, ChevronDown, DollarSign } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
+import EventCard from "../components/EventCard";
 import signup from "../assets/signup.jpeg";
-
-// Define the EventCard with additional details such as category, capacity, and price
-const EventCard = ({ id, cover_photo_url, title, start_datetime, location, category, capacity, price, isPrivate }) => (
-  <div className="bg-white rounded-lg overflow-hidden shadow-md transition-transform transform hover:scale-105">
-    <img src={cover_photo_url} alt={title} className="w-full h-48 object-cover" />
-    <div className="p-4">
-      <h3 className="font-semibold text-lg mb-2">{title}</h3>
-      <div className="flex items-center text-sm text-gray-600 mb-1">
-        <Calendar className="w-4 h-4 mr-2" />
-        <span>{start_datetime}</span>
-      </div>
-      <div className="flex items-center text-sm text-gray-600 mb-1">
-        <MapPin className="w-4 h-4 mr-2" />
-        <span>{location}</span>
-      </div>
-      <div className="flex items-center text-sm text-gray-600 mb-1">
-        <User className="w-4 h-4 mr-2" />
-        <span>Capacity: {capacity}</span>
-      </div>
-      <div className="flex items-center text-sm text-gray-600 mb-1">
-        <DollarSign className="w-4 h-4 mr-2" />
-        <span>{price ? `$${price}` : "Free"}</span>
-      </div>
-      <div className="text-sm text-gray-600 mb-1">
-        <span>Category: {category}</span>
-      </div>
-      <div className="text-sm text-gray-600 mb-4">
-        <span>Private Event: {isPrivate ? "Yes" : "No"}</span>
-      </div>
-
-      {/* Add Link to Single Event Page */}
-      <Link
-        to={`/event/${id}`}
-        className="mt-4 inline-block text-purple-600 hover:text-purple-800 transition-colors duration-200"
-      >
-        View Details
-      </Link>
-    </div>
-  </div>
-);
 
 const AllEventsPage = () => {
   const [events, setEvents] = useState([]);
@@ -54,8 +15,14 @@ const AllEventsPage = () => {
       .catch((error) => console.error("Error fetching events:", error));
   }, []);
 
+  // Function to handle event deletion
+  const handleEventDelete = (deletedEventId) => {
+    setEvents((prevEvents) => prevEvents.filter(event => event.id !== deletedEventId));
+  };
+
   return (
     <div className="bg-gray-100 min-h-screen">
+      {/* Hero Section */}
       <header className="bg-white py-10 shadow-lg">
         <div className="container mx-auto px-4">
           <div className="flex flex-col lg:flex-row justify-between items-center">
@@ -91,8 +58,11 @@ const AllEventsPage = () => {
         </div>
       </header>
 
+      {/* Events Section */}
       <main className="container mx-auto px-4 py-8">
         <h2 className="text-3xl font-semibold mb-4 animate-fade-in-up">Events around you</h2>
+
+        {/* Filters Section */}
         <div className="flex justify-between items-center mb-6">
           <button className="flex items-center bg-white px-4 py-2 rounded-full shadow-md hover:shadow-lg transition-shadow duration-200">
             <span className="mr-2">Category</span>
@@ -111,9 +81,10 @@ const AllEventsPage = () => {
           </div>
         </div>
 
+        {/* Events Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {events.map((event) => (
-            <EventCard key={event.id} {...event} />
+            <EventCard key={event.id} {...event} onDelete={handleEventDelete} />
           ))}
         </div>
       </main>
