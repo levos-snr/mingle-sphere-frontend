@@ -33,7 +33,7 @@ const SettingsDashboard = () => {
 
   const fetchNotifications = async () => {
     try {
-      const response = await fetch('/api/notifications');
+      const response = await fetch('/notifications');
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -61,7 +61,7 @@ const SettingsDashboard = () => {
 
   const handleDeleteNotification = async (id) => {
     try {
-      const response = await fetch(`/api/notifications/${id}`, { method: 'DELETE' });
+      const response = await fetch(`/notifications/${id}`, { method: 'DELETE' });
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -78,7 +78,7 @@ const SettingsDashboard = () => {
 
   const handleSaveProfile = async () => {
     try {
-      const response = await fetch(`/api/users/${currentUser.id}`, {
+      const response = await fetch(`/users/${currentUser.id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

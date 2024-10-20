@@ -39,11 +39,11 @@ const SingleEventPage = () => {
   useEffect(() => {
     const fetchEventDetails = async () => {
       try {
-        const eventResponse = await axios.get(`/api/events/${id}`);
+        const eventResponse = await axios.get(`/events/${id}`);
         setEvent(eventResponse.data);
 
         try {
-          const bookingResponse = await axios.get(`/api/bookings/user/${1}/event/${id}`); // Replace 1 with actual user ID
+          const bookingResponse = await axios.get(`/bookings/user/${1}/event/${id}`); // Replace 1 with actual user ID
         } catch (bookingError) {
           console.error("Error fetching booking:", bookingError);
           if (bookingError.response && bookingError.response.status === 404) {
@@ -97,7 +97,7 @@ const SingleEventPage = () => {
   
   const handleCancelBooking = async () => {
     try {
-      await axios.delete(`/api/bookings/${booking.id}`);
+      await axios.delete(`/bookings/${booking.id}`);
       setBooking(null);
     } catch (error) {
       console.error("Error cancelling booking:", error);

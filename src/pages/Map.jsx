@@ -88,7 +88,7 @@ const EventMap = () => {
 
     const fetchEvents = async () => {
       try {
-        const response = await axios.get('/api/events');
+        const response = await axios.get('/events');
         const eventsData = response.data;
 
         const geocodedEvents = await Promise.all(

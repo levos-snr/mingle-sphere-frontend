@@ -48,7 +48,7 @@ const MainDisplay = () => {
         if (category !== "Any category") {
           params.category = category;
         }
-        const response = await axios.get("/api/events", { params });
+        const response = await axios.get("/events", { params });
         setEvents(response.data);
       } catch (error) {
         setError("Failed to fetch events. Please try again.");

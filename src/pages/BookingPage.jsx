@@ -25,7 +25,7 @@ const BookingPage = () => {
   useEffect(() => {
     const fetchEventDetails = async () => {
       try {
-        const response = await axios.get(`/api/events/${id}`);
+        const response = await axios.get(`/events/${id}`);
         setEvent(response.data);
       } catch (error) {
         setError("Failed to fetch event details. Please try again.");
@@ -44,7 +44,7 @@ const BookingPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/api/bookings', bookingDetails);
+      const response = await axios.post('/bookings', bookingDetails);
       setToastMessage('Booking submitted successfully!');
       setToastType('success');
       setShowToast(true);

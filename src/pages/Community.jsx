@@ -23,8 +23,8 @@ const Community = () => {
   const fetchData = useCallback(async () => {
     try {
       const [eventsResponse, usersResponse] = await Promise.all([
-        fetch('/api/events'),
-        fetch('/api/users')
+        fetch('/events'),
+        fetch('/users')
       ]);
 
       if (!eventsResponse.ok || !usersResponse.ok) {
@@ -86,7 +86,7 @@ const Community = () => {
     }
 
     try {
-      const response = await fetch('/api/networking_connections', {
+      const response = await fetch('/networking_connections', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -137,7 +137,7 @@ const Community = () => {
     }
 
     try {
-      const response = await fetch(`/api/event_feedback`, {
+      const response = await fetch(`/event_feedback`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -23,7 +23,7 @@ const AllEventsPage = () => {
       const type = searchParams.get('type') || '';
       const eventDate = searchParams.get('date') || '';
 
-      let url = '/api/events';
+      let url = '/events';
       const response = await axios.get(url);
       
       let filteredEvents = response.data;
@@ -48,7 +48,7 @@ const AllEventsPage = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get('/api/events');
+      const response = await axios.get('/events');
       const uniqueCategories = [...new Set(response.data.map(event => event.category))];
       setCategories(uniqueCategories);
     } catch (error) {
@@ -58,7 +58,7 @@ const AllEventsPage = () => {
 
   const handleEventDelete = async (deletedEventId) => {
     try {
-      await axios.delete(`/api/events/${deletedEventId}`);
+      await axios.delete(`/events/${deletedEventId}`);
       setEvents((prevEvents) => prevEvents.filter(event => event.id !== deletedEventId));
     } catch (error) {
       console.error("Error deleting event:", error);
@@ -77,7 +77,7 @@ const AllEventsPage = () => {
 
   const filterEvents = async (category, timeFrame) => {
     try {
-      const response = await axios.get('/api/events');
+      const response = await axios.get('/events');
       let filteredEvents = response.data;
 
       if (category) {

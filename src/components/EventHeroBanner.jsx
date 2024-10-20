@@ -15,7 +15,7 @@ const EventHeroBanner = () => {
 
   const fetchEventTypes = async () => {
     try {
-      const response = await axios.get("/api/events");
+      const response = await axios.get("/events");
       const categories = [...new Set(response.data.map((event) => event.category))];
       setEventTypes(categories);
     } catch (error) {

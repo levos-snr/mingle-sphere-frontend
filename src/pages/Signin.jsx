@@ -22,7 +22,7 @@ const Signin = () => {
     }),
     onSubmit: async (values) => {
       try {
-        const response = await axios.post('/api/login', {
+        const response = await axios.post('/login', {
           email: values.email,
           password: values.password,
         });

@@ -9,7 +9,7 @@ const TrendingEventsSlider = () => {
   useEffect(() => {
     const fetchTrendingEvents = async () => {
       try {
-        const response = await axios.get("/api/events");
+        const response = await axios.get("/events");
         const filteredEvents = response.data.filter(event => event.capacity > 1000);
         setTrendingEvents(filteredEvents);
       } catch (error) {

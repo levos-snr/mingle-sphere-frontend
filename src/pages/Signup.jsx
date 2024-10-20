@@ -30,7 +30,7 @@ const Signup = () => {
     }),
     onSubmit: async (values) => {
       try {
-        const response = await axios.post('/api/register', {
+        const response = await axios.post('/register', {
           username: values.username,
           email: values.email,
           password: values.password,

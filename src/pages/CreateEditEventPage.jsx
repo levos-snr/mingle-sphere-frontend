@@ -48,7 +48,7 @@ const CreateEditEventPage = () => {
   
   const fetchEventData = async (eventId) => {
     try {
-      const response = await fetch(`/api/events/${eventId}`);
+      const response = await fetch(`/events/${eventId}`);
       if (!response.ok) {
         throw new Error('Failed to fetch event data');
       }
@@ -137,7 +137,7 @@ const CreateEditEventPage = () => {
       eventData.organizer_id = user.id;
       
 
-      const url = isEditing ? `/api/events/${id}` : '/api/events';
+      const url = isEditing ? `/events/${id}` : '/events';
       const method = isEditing ? 'PATCH' : 'POST';
 
       const response = await fetch(url, {
@@ -166,7 +166,7 @@ const CreateEditEventPage = () => {
         const formData = new FormData();
         formData.append('cover_photo', values.cover_photo_file);
         
-        const fileUploadResponse = await fetch('/api/events/upload-photo', {
+        const fileUploadResponse = await fetch('/events/upload-photo', {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${user.token}`,

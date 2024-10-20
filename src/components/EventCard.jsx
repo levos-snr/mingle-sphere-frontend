@@ -18,7 +18,7 @@ const EventCard = ({ id, cover_photo_url, title, start_datetime, location, categ
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this event?")) {
       try {
-        const response = await axios.delete(`/api/events/${id}`, {
+        const response = await axios.delete(`/events/${id}`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`, 
           },
