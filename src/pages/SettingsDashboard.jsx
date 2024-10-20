@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { 
   User, 
   Calendar, 
   Bell, 
-  Settings, 
   Edit, 
   Trash, 
   Check,
@@ -11,7 +10,7 @@ import {
   ChevronRight,
   Save
 } from 'lucide-react';
-import { Tooltip, Modal, Alert, Toast } from 'flowbite-react';  // Import Toast
+import { Tooltip, Modal, Alert, Toast } from 'flowbite-react'; 
 
 const SettingsDashboard = () => {
   const [activeTab, setActiveTab] = useState('profile');
@@ -22,7 +21,6 @@ const SettingsDashboard = () => {
   const [editedUser, setEditedUser] = useState(null);
   const [error, setError] = useState(null);
 
-  // States for handling toasts
   const [showSuccessToast, setShowSuccessToast] = useState(false);
   const [showErrorToast, setShowErrorToast] = useState(false);
 
@@ -98,14 +96,12 @@ const SettingsDashboard = () => {
       setShowModal(false);
       setError(null);
 
-      // Show success toast
       setShowSuccessToast(true);
       setTimeout(() => setShowSuccessToast(false), 3000); // Hide after 3 seconds
     } catch (error) {
       console.error('Error updating user profile:', error);
       setError('Failed to update profile. Please try again later.');
 
-      // Show error toast
       setShowErrorToast(true);
       setTimeout(() => setShowErrorToast(false), 3000); // Hide after 3 seconds
     }
@@ -188,14 +184,12 @@ const SettingsDashboard = () => {
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-4xl font-bold mb-8 text-orange-500">Settings Dashboard</h1>
 
-        {/* Error Alert */}
         {error && (
           <Alert color="failure" className="mb-4">
             <span className="font-medium">Error!</span> {error}
           </Alert>
         )}
 
-        {/* Success Toast */}
         {showSuccessToast && (
           <Toast>
             <div className="inline-flex items-center p-4 text-sm text-green-700 bg-green-100 rounded-lg">
@@ -205,7 +199,6 @@ const SettingsDashboard = () => {
           </Toast>
         )}
 
-        {/* Error Toast */}
         {showErrorToast && (
           <Toast>
             <div className="inline-flex items-center p-4 text-sm text-red-700 bg-red-100 rounded-lg">

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { MapPin, Clock, ArrowLeft, Check, X } from "lucide-react";
@@ -6,7 +6,7 @@ import Map, { Marker } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import mapboxgl from 'mapbox-gl';
 
-// Add mapbox token 
+// mapbox token 
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN;
 
 const SingleEventPage = () => {
@@ -55,7 +55,7 @@ const SingleEventPage = () => {
         }
 
         if (eventResponse.data.location) {
-          // Fetch coordinates using OpenStreetMap Nominatim API
+          // coordinates using OpenStreetMap Nominatim API
           const geocodeResponse = await axios.get(
             `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(eventResponse.data.location)}`
           );
@@ -117,7 +117,6 @@ const SingleEventPage = () => {
   
   return (
     <div className="bg-white">
-      {/* Hero Section */}
       <div
         className="relative h-[400px] bg-cover bg-center"
         style={{
@@ -134,7 +133,6 @@ const SingleEventPage = () => {
           </div>
         </div>
 
-        {/* Booking Widget */}
         <div className="absolute top-8 right-8 bg-white rounded-lg shadow-lg p-4 w-72">
           <h3 className="font-bold mb-2">Date & time</h3>
           <p className="text-sm mb-2">{new Date(event.start_datetime).toLocaleString()}</p>
@@ -168,7 +166,6 @@ const SingleEventPage = () => {
       </div>
       
       
-      {/* Back Button */}
       <div className="container mx-auto px-4 py-4">
         <button
           onClick={() => navigate(-1)}

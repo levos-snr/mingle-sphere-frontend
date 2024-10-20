@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
@@ -54,7 +54,6 @@ const Signin = () => {
         </div>
       </div>
 
-      {/* Right side - Signin Form */}
       <div className="w-full lg:w-1/2 flex items-center justify-center">
         <div className="max-w-md w-full space-y-8 p-8 animate-fade-in-up">
           <div>

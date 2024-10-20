@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { User, LogOut, Settings, Heart, ChevronDown, Bell } from "lucide-react";
 import logo from "../assets/logo.png";
@@ -6,7 +6,7 @@ import logo from "../assets/logo.png";
 const Navbar = () => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false); // State for mobile menu toggle
+  const [menuOpen, setMenuOpen] = useState(false);
   const dropdownRef = useRef(null);
 
   // Get the user data from localStorage
@@ -44,7 +44,6 @@ const Navbar = () => {
 
 
 
-        {/* Links for larger screens */}
         <div
           className={`${
             menuOpen ? "block" : "hidden"
@@ -81,7 +80,6 @@ const Navbar = () => {
         <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse gap-3 items-center">
           {user ? (
             <>
-              {/* Notification icon for authenticated users */}
               <button className="text-gray-400 hover:text-orange-500 focus:outline-none transition-transform transform duration-200 ease-in-out">
                 <Bell className="w-6 h-6" />
               </button>
@@ -158,7 +156,6 @@ const Navbar = () => {
               </NavLink>
             </>
           )}
-          {/* Mobile Menu Button */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className="inline-flex items-center p-2 ml-3 text-sm text-gray-400 rounded-lg md:hidden hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600"

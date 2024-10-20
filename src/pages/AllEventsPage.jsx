@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { useLocation } from "react-router-dom";
 import EventCard from "../components/EventCard";
@@ -112,7 +112,6 @@ const AllEventsPage = () => {
 
   return (
     <div className="bg-gray-100 min-h-screen">
-      {/* Hero Section */}
       <header className="bg-white py-10 shadow-lg">
         <div className="container mx-auto px-4">
           <div className="flex flex-col lg:flex-row justify-between items-center">
@@ -148,11 +147,9 @@ const AllEventsPage = () => {
         </div>
       </header>
 
-      {/* Events Section */}
       <main className="container mx-auto px-4 py-8">
         <h2 className="text-3xl font-semibold mb-4 animate-fade-in-up">Events around you</h2>
         
-        {/* Filters Section */}
         <div className="flex justify-between items-center mb-6">
           <div className="relative">
             <button 
@@ -189,7 +186,6 @@ const AllEventsPage = () => {
           </div>
         </div>
 
-        {/* Events Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {events.map((event) => (
             <EventCard key={event.id} {...event} onDelete={handleEventDelete} />

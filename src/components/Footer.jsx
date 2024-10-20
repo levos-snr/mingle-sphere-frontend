@@ -1,18 +1,15 @@
-import React from 'react';
 import { Instagram, Facebook, Linkedin } from 'lucide-react';
 
 const Footer = () => {
   return (
     <footer className="bg-gray-800 text-white py-8 px-4">
       <div className="container mx-auto">
-        {/* Footer top section */}
         <div className="flex flex-col md:flex-row justify-between items-center mb-6 space-y-4 md:space-y-0">
           {/* Logo Section */}
           <h2 className="text-2xl font-bold">
             mingle<span className="text-orange-400">sphere</span>
           </h2>
 
-          {/* Subscribe Input */}
           <div className="flex items-center">
             <input
               type="email"
@@ -25,7 +22,6 @@ const Footer = () => {
           </div>
         </div>
         
-        {/* Navigation Links */}
         <nav className="mb-6">
           <ul className="flex flex-wrap justify-center md:justify-start space-x-6 text-sm">
             <li><a href="#" className="hover:text-orange-400 transition-colors">Home</a></li>
@@ -36,12 +32,9 @@ const Footer = () => {
           </ul>
         </nav>
 
-        {/* Divider */}
         <hr className="border-gray-700 mb-6" />
 
-        {/* Social Icons and Copyright */}
         <div className="flex flex-col md:flex-row justify-between items-center">
-          {/* Social Media Icons */}
           <div className="flex space-x-4 mb-4 md:mb-0">
             <a href="#" className="text-orange-400 hover:text-orange-300 transition-colors">
               <Linkedin size={20} />
@@ -54,7 +47,6 @@ const Footer = () => {
             </a>
           </div>
 
-          {/* Copyright Text */}
           <p className="text-sm text-gray-400">
             © 2024 Minglesphere. All rights reserved.
           </p>

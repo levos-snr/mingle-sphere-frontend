@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { MapPin, Clock } from "lucide-react";
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-// Add mapbox token
+// mapbox token
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN;
 
 const EventMap = () => {
@@ -39,7 +39,7 @@ const EventMap = () => {
         });
 
         mapRef.current.on('load', () => {
-          // Add 3D buildings
+          // 3D buildings
           const layers = mapRef.current.getStyle().layers;
           const labelLayerId = layers.find(
             (layer) => layer.type === 'symbol' && layer.layout['text-field']
@@ -153,7 +153,7 @@ const EventMap = () => {
   const handleEventClick = (event) => {
     setSelectedEvent(event);
 
-    // Fly to event location on map
+    // fly to event location on map (kama ndege)
     if (mapRef.current && event.latitude && event.longitude) {
       mapRef.current.flyTo({
         center: [event.longitude, event.latitude],
@@ -164,7 +164,6 @@ const EventMap = () => {
 
   return (
     <div className="flex flex-col lg:flex-row h-screen">
-      {/* Events List */}
       <div className="lg:w-1/3 p-4 overflow-y-auto bg-gray-900 lg:h-screen">
         <h2 className="text-xl font-bold text-orange-500 mb-4">Events</h2>
         {error && <p className="text-red-500">{error}</p>}
@@ -196,7 +195,7 @@ const EventMap = () => {
         )}
       </div>
 
-      {/* Map */}
+      {/* mapppp */}
       <div className="lg:w-2/3 w-full" ref={mapContainerRef} style={{ height: "100%" }} />
     </div>
   );

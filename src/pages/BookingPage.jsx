@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Toast } from 'flowbite-react';
@@ -15,7 +15,7 @@ const BookingPage = () => {
   const [toastMessage, setToastMessage] = useState('');
   const [toastType, setToastType] = useState('success');
   const [bookingDetails, setBookingDetails] = useState({
-    user_id: 1, // Replace with actual user ID from authentication
+    user_id: 1,
     event_id: parseInt(id),
     status: 'pending',
     dietary_preferences: '',

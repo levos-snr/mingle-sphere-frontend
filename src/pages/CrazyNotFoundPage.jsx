@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useParams, Link, useNavigate  } from "react-router-dom";
 
 import {
@@ -15,7 +15,6 @@ const CrazyNotFoundPage = () => {
  const navigate = useNavigate();  
 
   useEffect(() => {
-    // Add animation to the 404 text
     const fourOhFour = document.getElementById("four-oh-four");
     fourOhFour.classList.add("animate-bounce");
   }, []);

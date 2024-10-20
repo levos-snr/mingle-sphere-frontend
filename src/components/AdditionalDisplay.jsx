@@ -1,7 +1,6 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
-import { Users } from 'lucide-react'; // Lucide Icon
-import { Button } from 'flowbite-react'; // Flowbite Button
+import { Users } from 'lucide-react'; 
+import { Button } from 'flowbite-react'; 
 import graph from '../assets/graph.png';
 
 const MakeEventSection = () => (
@@ -14,7 +13,7 @@ const MakeEventSection = () => (
       <Link to="/addEvent">
         <Button className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg shadow-lg transition-transform transform hover:scale-105">
           <span className="flex items-center">
-            <Users className="mr-2 h-5 w-5" /> {/* Lucide Icon */}
+            <Users className="mr-2 h-5 w-5" />
             Create Event
           </span>
         </Button>

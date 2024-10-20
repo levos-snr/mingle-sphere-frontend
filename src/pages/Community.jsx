@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
@@ -39,7 +39,7 @@ const Community = () => {
       setEvents(eventsData);
       setMembers(usersData);
 
-      //chat messages from local storage
+      //chat messages from local storage (tutaweka db in fututure)
       const storedChats = localStorage.getItem('chats');
       if (storedChats) {
         setChats(JSON.parse(storedChats));
@@ -105,7 +105,7 @@ const Community = () => {
         );
         setMembers(updatedMembers);
 
-        // Update local storage
+        // updade thee local storage
         const following = updatedMembers
           .filter(member => member.isFollowed)
           .map(member => member.id);
@@ -126,7 +126,7 @@ const Community = () => {
       };
       setChats(prevChats => [...prevChats, newChat]);
       setNewMessage('');
-      //  send the message to your backend API
+      //  send the message to your backend API (tutaweka db in fututure)
     }
   };
 
@@ -150,7 +150,6 @@ const Community = () => {
         }),
       });
       if (response.ok) {
-        // Update UI to show the reaction
         setEvents(events.map(event => 
           event.id === eventId ? { ...event, userReaction: reactionType } : event
         ));
@@ -161,7 +160,7 @@ const Community = () => {
   };
 
   const startVideoCall = () => {
-    // video call functionality
+    // video call functionality future too
     console.log('Starting video call...');
   };
 

@@ -1,32 +1,32 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Calendar, MapPin, User, DollarSign, Edit, Trash } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from 'axios'; // Import axios for API calls
+import axios from 'axios'; 
 
 const EventCard = ({ id, cover_photo_url, title, start_datetime, location, category, capacity, price, isPrivate, onDelete }) => {
   const [user, setUser] = useState(null);
-  const navigate = useNavigate(); // Used to navigate after deletion
 
-  // Fetch user from local storage
+  // user from local storage
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem('user'));
     setUser(storedUser);
   }, []);
 
-  const isAdmin = user?.role === 'admin'; // Check if user is an admin
+  //  if user is an admin
+  const isAdmin = user?.role === 'admin'; 
 
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this event?")) {
       try {
         const response = await axios.delete(`/api/events/${id}`, {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`, // Include auth token if needed
+            Authorization: `Bearer ${localStorage.getItem('token')}`, 
           },
         });
         
         if (response.status === 200) {
           alert("Event deleted successfully");
-          onDelete(id); // Notify parent component of the deletion
+          onDelete(id);
         }
       } catch (error) {
         console.error("Error deleting event:", error);

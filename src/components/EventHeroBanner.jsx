@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Search } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -48,7 +48,6 @@ const EventHeroBanner = () => {
         <div className="absolute bottom-0 left-0 right-0 transform translate-y-1/2">
           <div className="w-full max-w-4xl mx-auto px-4">
             <div className="bg-gray-800 p-6 rounded-lg flex flex-col md:flex-row gap-4 shadow-lg animate-slideUp">
-              {/* Event Type */}
               <div className="flex-1">
                 <span className="block text-sm mb-1 text-gray-400">
                   Looking for
@@ -66,7 +65,6 @@ const EventHeroBanner = () => {
                   ))}
                 </select>
               </div>
-              {/* Date & Time */}
               <div className="flex-1">
                 <span className="block text-sm mb-1 text-gray-400">When</span>
                 <input
@@ -76,7 +74,6 @@ const EventHeroBanner = () => {
                   onChange={(e) => setSelectedDate(e.target.value)}
                 />
               </div>
-              {/* Search Button */}
               <button
                 className="bg-orange-500 text-white p-3 rounded-lg flex items-center justify-center self-end md:self-center hover:bg-orange-600 transition-transform transform hover:scale-110"
                 onClick={handleSearch}

@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import { Toast } from 'flowbite-react';
 import axios from 'axios';
-import img from '../assets/signup.jpeg';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -53,7 +52,6 @@ const Signup = () => {
 
   return (
     <div className="flex h-screen bg-gray-800">
-      {/* Left side - Image */}
       <div className="hidden lg:flex w-1/2 bg-cover bg-center" style={{ backgroundImage: "url('https://www.eventbookings.com/wp-content/uploads/2024/01/Different-Types-of-Events-in-2024-Which-is-Right-for-You-1536x1024.jpg')" }}>
         <div className="w-full flex flex-col justify-center items-center backdrop-blur-sm bg-black/50 text-white p-12">
           <h2 className="text-4xl font-bold mb-4 animate-fade-in">Welcome to MingleSphere</h2>
@@ -61,7 +59,6 @@ const Signup = () => {
         </div>
       </div>
 
-      {/* Right side - Signup Form */}
       <div className="w-full lg:w-1/2 flex items-center justify-center">
         <div className="max-w-md w-full space-y-8 p-8 bg-white rounded-lg shadow-lg animate-fade-in-up">
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign up for MingleSphere</h2>

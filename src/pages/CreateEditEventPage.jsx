@@ -55,7 +55,7 @@ const CreateEditEventPage = () => {
       const data = await response.json();
       setEventData(data);
       
-      // Pre-populate the form with fetched data
+      // pre-populate  form with fetched event data
       setInitialValues({
         title: data.title || '',
         location: data.location || '',
@@ -77,7 +77,7 @@ const CreateEditEventPage = () => {
     }
   };
   
-  // Function to handle location input and suggest predictions
+  // handle location input and suggest predictions
   const handleLocationChange = async (event) => {
     const locationQuery = event.target.value;
     if (locationQuery.length < 3) {
@@ -161,7 +161,7 @@ const CreateEditEventPage = () => {
         resetForm();
       }
 
-      // Handle file upload separately if a file was selected
+      //  file upload separately if a file was selected(ongeza in future)
       if (values.cover_photo_file) {
         const formData = new FormData();
         formData.append('cover_photo', values.cover_photo_file);
@@ -179,7 +179,6 @@ const CreateEditEventPage = () => {
         }
       }
 
-      // Navigate back to the events page after successful submission
       setToastType('success');
       navigate(-1)
     } catch (error) {

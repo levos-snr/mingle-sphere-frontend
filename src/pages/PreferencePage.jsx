@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Settings,
@@ -18,7 +18,6 @@ const PreferencePage = () => {
   const [notificationsOn, setNotificationsOn] = useState(true);
 
   useEffect(() => {
-    // Add animation to the Preferences text
     const preferencesText = document.getElementById("preferences-text");
     preferencesText.classList.add("animate-pulse");
   }, []);
