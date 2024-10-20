@@ -7,14 +7,24 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Input } from '@/components/ui/input';
 import { Loader2, Camera, Video, Users, ThumbsUp, ThumbsDown, Heart } from 'lucide-react';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+
+
+
+const dummyChats = [
+  { id: 1, text: "Hello everyone!", user: "john_doe", timestamp: "2023-10-20T10:30:00" },
+  { id: 2, text: "Hi John! How are you?", user: "jane_smith", timestamp: "2023-10-20T10:31:00" },
+];
+
+
 
 const Community = () => {
   const [events, setEvents] = useState([]);
   const [members, setMembers] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [chats, setChats] = useState([]);
+  const [chats, setChats] = useState(dummyChats);
   const [newMessage, setNewMessage] = useState('');
   const [guides, setGuides] = useState([]);
   const [topics, setTopics] = useState([]);
@@ -22,48 +32,24 @@ const Community = () => {
 
   const fetchData = useCallback(async () => {
     try {
-      const [eventsResponse, usersResponse] = await Promise.all([
-        fetch('/events'),
-        fetch('/users')
-      ]);
-
-      if (!eventsResponse.ok || !usersResponse.ok) {
-        throw new Error('One or more API requests failed');
-      }
-
-      const [eventsData, usersData] = await Promise.all([
-        eventsResponse.json(),
-        usersResponse.json()
-      ]);
-
-      setEvents(eventsData);
-      setMembers(usersData);
-
-      //chat messages from local storage (tutaweka db in fututure)
-      const storedChats = localStorage.getItem('chats');
-      if (storedChats) {
-        setChats(JSON.parse(storedChats));
-      }
+    
+     const response = await axios.get('/users');
+        const members = response.data;
+        setMembers(members);
+        
+        const responseEvents = await axios.get('/events');
+        const events = responseEvents.data;
+        setEvents(events);
+      
 
       // user from local storage
       const storedUser = localStorage.getItem('user');
       if (storedUser) {
         setCurrentUser(JSON.parse(storedUser));
       }
-      
-      
-
-      // following status
-      const storedFollowing = localStorage.getItem('following');
-      if (storedFollowing) {
-        const followingSet = new Set(JSON.parse(storedFollowing));
-        setMembers(usersData.map(user => ({
-          ...user,
-          isFollowed: followingSet.has(user.id)
-        })));
-      }
 
     } catch (error) {
+      console.error('Error in fetchData:', error);
       setError(error.message);
     } finally {
       setLoading(false);
@@ -74,46 +60,16 @@ const Community = () => {
     fetchData();
   }, [fetchData]);
 
-  useEffect(() => {
-    // chats to local 
-    localStorage.setItem('chats', JSON.stringify(chats));
-  }, [chats]);
-
   const handleFollow = async (userId) => {
     if (!currentUser) {
       console.error('No current user found');
       return;
     }
 
-    try {
-      const response = await fetch('/networking_connections', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          user_id_1: currentUser.id,
-          user_id_2: userId,
-          event_id: null,
-          connection_status: 'pending'
-        }),
-      });
-      if (response.ok) {
-        
-        const updatedMembers = members.map(member => 
-          member.id === userId ? { ...member, isFollowed: !member.isFollowed } : member
-        );
-        setMembers(updatedMembers);
-
-        // updade thee local storage
-        const following = updatedMembers
-          .filter(member => member.isFollowed)
-          .map(member => member.id);
-        localStorage.setItem('following', JSON.stringify(following));
-      }
-    } catch (error) {
-      console.error('Error following user:', error);
-    }
+    const updatedMembers = members.map(member => 
+      member.id === userId ? { ...member, isFollowed: !member.isFollowed } : member
+    );
+    setMembers(updatedMembers);
   };
 
   const handleSendMessage = () => {
@@ -126,7 +82,6 @@ const Community = () => {
       };
       setChats(prevChats => [...prevChats, newChat]);
       setNewMessage('');
-      //  send the message to your backend API (tutaweka db in fututure)
     }
   };
 
@@ -136,31 +91,12 @@ const Community = () => {
       return;
     }
 
-    try {
-      const response = await fetch(`/event_feedback`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          event_id: eventId,
-          user_id: currentUser.id,
-          rating: reactionType === 'like' ? 5 : 1,
-          comment: reactionType === 'like' ? 'Liked' : 'Disliked'
-        }),
-      });
-      if (response.ok) {
-        setEvents(events.map(event => 
-          event.id === eventId ? { ...event, userReaction: reactionType } : event
-        ));
-      }
-    } catch (error) {
-      console.error('Error reacting to event:', error);
-    }
+    setEvents(events.map(event => 
+      event.id === eventId ? { ...event, userReaction: reactionType } : event
+    ));
   };
 
   const startVideoCall = () => {
-    // video call functionality future too
     console.log('Starting video call...');
   };
 
