@@ -12,7 +12,7 @@ const Home = () => {
       </div>
 
       {/* Main Display Section with Fade-in and Slide-up Animation */}
-      <div className="mt-12 animate-slide-up">
+      <div className="mt-[6rem] animate-slide-up">
         <MainDisplay />
       </div>
 

@@ -4,6 +4,9 @@ import * as Yup from 'yup';
 import { Toast } from 'flowbite-react';
 import { Calendar, MapPin, Image as ImageIcon } from 'lucide-react';
 import { useParams, useNavigate } from 'react-router-dom';
+import mapboxSdk from '@mapbox/mapbox-sdk/services/geocoding';
+
+
 
 const CreateEditEventPage = () => {
   const [user, setUser] = useState(null);
@@ -12,6 +15,7 @@ const CreateEditEventPage = () => {
   const [toastType, setToastType] = useState('success');
   const [isEditing, setIsEditing] = useState(false);
   const [eventData, setEventData] = useState(null);
+  const [locationSuggestions, setLocationSuggestions] = useState([]);
   const [initialValues, setInitialValues] = useState({
     title: '',
     location: '',
@@ -28,7 +32,7 @@ const CreateEditEventPage = () => {
   
   const { id } = useParams();
   const navigate = useNavigate();
-
+  const geocodingClient = mapboxSdk({ accessToken:  import.meta.env.VITE_MAPBOX_ACCESS_TOKEN });
   
   useEffect(() => {
       const storedUser = localStorage.getItem('user');
@@ -70,6 +74,30 @@ const CreateEditEventPage = () => {
       setToastMessage('Error fetching event data: ' + error.message);
       setToastType('error');
       setShowToast(true);
+    }
+  };
+  
+  // Function to handle location input and suggest predictions
+  const handleLocationChange = async (event) => {
+    const locationQuery = event.target.value;
+    if (locationQuery.length < 3) {
+      setLocationSuggestions([]);
+      return;
+    }
+
+    try {
+      const response = await geocodingClient
+        .forwardGeocode({
+          query: locationQuery,
+          limit: 5,
+        })
+        .send();
+
+      if (response && response.body && response.body.features) {
+        setLocationSuggestions(response.body.features);
+      }
+    } catch (error) {
+      console.error('Error fetching location suggestions:', error);
     }
   };
   
@@ -203,7 +231,25 @@ const CreateEditEventPage = () => {
                   name="location"
                   className="block w-full pl-10 border border-gray-300 rounded-md shadow-sm p-2"
                   placeholder="Enter event venue"
+                  onChange={(e) => {
+                    setFieldValue("location", e.target.value);
+                    handleLocationChange(e);
+                  }}
                 />
+                <ul className="absolute bg-white border border-gray-300 rounded-md shadow-md mt-1 w-full max-h-48 overflow-y-auto z-50">
+                  {locationSuggestions.map((suggestion) => (
+                    <li
+                      key={suggestion.id}
+                      onClick={() => {
+                        setFieldValue("location", suggestion.place_name);
+                        setLocationSuggestions([]);
+                      }}
+                      className="p-2 hover:bg-indigo-500 hover:text-white cursor-pointer"
+                    >
+                      {suggestion.place_name}
+                    </li>
+                  ))}
+                </ul>
               </div>
               <ErrorMessage name="location" component="div" className="text-red-500 text-sm mt-1" />
             </div>
@@ -265,7 +311,7 @@ const CreateEditEventPage = () => {
                 </div>
                 <ErrorMessage name="cover_photo_url" component="div" className="text-red-500 text-sm mt-1" />
               </div>
-              <div className="mb-4">
+              {/* <div className="mb-4">
                 <label htmlFor="cover_photo_file" className="block text-sm font-medium text-gray-700">
                   Or Upload Event Image
                 </label>
@@ -306,7 +352,7 @@ const CreateEditEventPage = () => {
                     <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
 
             <div>

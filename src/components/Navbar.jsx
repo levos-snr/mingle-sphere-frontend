@@ -6,14 +6,15 @@ import logo from "../assets/logo.png";
 const Navbar = () => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false); // State for mobile menu toggle
   const dropdownRef = useRef(null);
 
   // Get the user data from localStorage
-  const user = JSON.parse(localStorage.getItem('user'));
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const handleSignOut = () => {
-    localStorage.removeItem('user');
-    navigate('/login');
+    localStorage.removeItem("user");
+    navigate("/login");
     window.location.reload();
   };
 
@@ -41,26 +42,40 @@ const Navbar = () => {
           </span>
         </NavLink>
 
-        {/* New navigation links */}
-        <div className="hidden md:flex items-center space-x-4">
-          <NavLink
-            to="/allEvent"
-            className="text-gray-300 hover:text-orange-500 transition duration-150 ease-in-out"
-          >
-            All Events
-          </NavLink>
-          <NavLink
-            to="/community"
-            className="text-gray-300 hover:text-orange-500 transition duration-150 ease-in-out"
-          >
-            Community
-          </NavLink>
-          <NavLink
-            to="/map"
-            className="text-gray-300 hover:text-orange-500 transition duration-150 ease-in-out"
-          >
-            Map
-          </NavLink>
+
+
+        {/* Links for larger screens */}
+        <div
+          className={`${
+            menuOpen ? "block" : "hidden"
+          } w-full md:flex md:w-auto md:items-center`}
+        >
+          <ul className="flex flex-col md:flex-row md:space-x-4 md:mt-0 md:text-sm md:font-medium">
+            <li>
+              <NavLink
+                to="/allEvent"
+                className="block py-2 pr-4 pl-3 text-gray-300 hover:text-orange-500 md:p-0"
+              >
+                All Events
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/community"
+                className="block py-2 pr-4 pl-3 text-gray-300 hover:text-orange-500 md:p-0"
+              >
+                Community
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/map"
+                className="block py-2 pr-4 pl-3 text-gray-300 hover:text-orange-500 md:p-0"
+              >
+                Map
+              </NavLink>
+            </li>
+          </ul>
         </div>
 
         <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse gap-3 items-center">
@@ -94,7 +109,7 @@ const Navbar = () => {
                   />
                 </button>
                 {isOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-gray-800 rounded-md overflow-hidden shadow-xl z-10 animate-fadeIn">
+                  <div className="absolute left-[-65px] mt-2  w-48 bg-gray-800 rounded-md overflow-hidden shadow-xl z-10 animate-fadeIn">
                     <div className="px-4 py-2 border-b border-gray-700">
                       <p className="text-sm font-medium text-gray-400">
                         {user.name}
@@ -143,7 +158,30 @@ const Navbar = () => {
               </NavLink>
             </>
           )}
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="inline-flex items-center p-2 ml-3 text-sm text-gray-400 rounded-lg md:hidden hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600"
+          >
+            <span className="sr-only">Open main menu</span>
+            <svg
+              className="w-6 h-6"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d={menuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
+              />
+            </svg>
+          </button>
         </div>
+
       </div>
     </nav>
   );

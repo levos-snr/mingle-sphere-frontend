@@ -15,8 +15,8 @@ const EventHeroBanner = () => {
 
   const fetchEventTypes = async () => {
     try {
-      const response = await axios.get('/api/events');
-      const categories = [...new Set(response.data.map(event => event.category))];
+      const response = await axios.get("/api/events");
+      const categories = [...new Set(response.data.map((event) => event.category))];
       setEventTypes(categories);
     } catch (error) {
       console.error("Error fetching event types:", error);
@@ -25,8 +25,8 @@ const EventHeroBanner = () => {
 
   const handleSearch = () => {
     const queryParams = new URLSearchParams();
-    if (selectedType) queryParams.append('type', selectedType);
-    if (selectedDate) queryParams.append('date', selectedDate);
+    if (selectedType) queryParams.append("type", selectedType);
+    if (selectedDate) queryParams.append("date", selectedDate);
     navigate(`/allEvent?${queryParams.toString()}`);
   };
 

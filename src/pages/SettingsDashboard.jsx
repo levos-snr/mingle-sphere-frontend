@@ -215,8 +215,8 @@ const SettingsDashboard = () => {
           </Toast>
         )}
 
-        <div className="flex">
-          <div className="w-1/4 pr-4">
+        <div className="flex flex-col md:flex-row">
+          <div className="w-full md:w-1/4 pr-4 mb-4 md:mb-0">
             <nav className="space-y-2">
               {['profile', 'events', 'notifications'].map((tab) => (
                 <button
@@ -235,7 +235,7 @@ const SettingsDashboard = () => {
               ))}
             </nav>
           </div>
-          <div className="w-3/4 pl-4">
+          <div className="w-full md:w-3/4 pl-0 md:pl-4">
             <div className="bg-gray-800 p-6 rounded-lg">
               {renderTabContent()}
             </div>
