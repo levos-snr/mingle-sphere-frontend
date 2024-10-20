@@ -2,6 +2,11 @@
 
 This is a web application built using React, Node.js, and MongoDB. It is designed to provide a platform for organizing and managing events, allowing users to create, edit, and manage their events. The application also includes features for booking, payment processing, and user authentication.
 
+## Screebshot
+
+![FireShot Capture 001 - Vite + React - localhost](https://github.com/user-attachments/assets/2677692f-3f19-4117-8cb1-08fe0751ad13)
+
+
 ## Features
 
 - User registration and login
