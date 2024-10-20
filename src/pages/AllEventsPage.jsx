@@ -88,9 +88,10 @@ const AllEventsPage = () => {
         const currentDate = new Date();
         const oneWeek = 7 * 24 * 60 * 60 * 1000;
         const oneMonth = 30 * 24 * 60 * 60 * 1000;
+        const oneYear = 365 * 24 * 60 * 60 * 1000;
 
         filteredEvents = filteredEvents.filter(event => {
-          const eventDate = new Date(event.date);
+          const eventDate = new Date(event.start_datetime);
           switch (timeFrame) {
             case 'This Week':
               return eventDate >= currentDate && eventDate <= new Date(currentDate.getTime() + oneWeek);
@@ -98,6 +99,8 @@ const AllEventsPage = () => {
               return eventDate >= new Date(currentDate.getTime() + oneWeek) && eventDate <= new Date(currentDate.getTime() + 2 * oneWeek);
             case 'This Month':
               return eventDate >= currentDate && eventDate <= new Date(currentDate.getTime() + oneMonth);
+            case 'This Year':
+              return eventDate >= currentDate && eventDate <= new Date(currentDate.getTime() + oneYear);
             default:
               return true;
           }
@@ -172,7 +175,7 @@ const AllEventsPage = () => {
             </div>
           </div>
           <div className="flex space-x-2">
-            {["This Week", "Next Week", "This Month"].map((timeFrame) => (
+            {["This Week", "Next Week", "This Month", "This Year"].map((timeFrame) => (
               <button 
                 key={timeFrame}
                 className={`bg-white px-4 py-2 rounded-full shadow-md hover:shadow-lg transition-shadow duration-200 ${
