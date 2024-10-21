@@ -29,7 +29,7 @@ const Signin = () => {
         console.log('Login successful:', response.data);
         
         const { user } = response.data;
-        localStorage.setItem('user', JSON.stringify(user)); // Storing user data
+        localStorage.setItem('user', JSON.stringify(user)); 
         
         setToastMessage('Login successful! Redirecting...');
         setToastType('success');
